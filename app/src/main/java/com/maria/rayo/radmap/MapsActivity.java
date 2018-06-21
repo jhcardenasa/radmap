@@ -146,11 +146,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //dibujo de los cuadrados
 
+
+        //Instanciamos la clase que maneja los colores
+        Colors colors = new Colors();
+
+        Integer colorPosition =  0;
         for(double j = 0; j< 30; j++){
             for(double i = 0; i< 30; i++){
+                //seteamos colores con una variable
+
+
                 Cuadrados cuadradoActual = new Cuadrados(puntoReferencia);
                 Polygon polygon = mMap.addPolygon(cuadradoActual.getPolygonOptions());
                 polygon.setStrokeWidth(1);
+                polygon.setFillColor(colors.getColorList().get((int) (Math.random() * (colors.getColorList().size()-1))));
+
                 puntoReferencia = new Mylatlng(puntoReferencia.getLatitud(), puntoReferencia.getLongitud()+cuadradoActual.getDiagonal());
             }
             puntoReferencia = new Mylatlng(puntoReferencia.getLatitud()-(miCuadrado.getDiagonal()), puntoInicio.getLongitud());
